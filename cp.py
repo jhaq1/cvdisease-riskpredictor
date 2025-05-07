@@ -39,6 +39,7 @@ x_train, x_val, y_train, y_val = train_test_split(x_scaled, y, test_size=0.2, ra
 @st.cache_resource
 def train_model(x_train, y_train, x_val, y_val):
     def sensitivity(y_true, y_pred):
+        y_true = K.cast(y_true, 'float32')
         true_pos = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
         poss_pos = K.sum(K.round(K.clip(y_true, 0, 1)))
         return true_pos / (poss_pos + K.epsilon())
