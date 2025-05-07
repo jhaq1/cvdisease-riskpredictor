@@ -45,6 +45,7 @@ def train_model(x_train, y_train, x_val, y_val):
         return true_pos / (poss_pos + K.epsilon())
 
     def specificity(y_true, y_pred):
+        y_true = K.cast(y_true, 'float32')
         true_neg = K.sum(K.round(K.clip((1 - y_true) * (1 - y_pred), 0, 1)))
         poss_neg = K.sum(K.round(K.clip(1 - y_true, 0, 1)))
         return true_neg / (poss_neg + K.epsilon())
